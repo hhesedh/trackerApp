@@ -7,7 +7,7 @@ import NavLink from '../components/NavLink';
 
 const SignupScreen = ({ navigation }) => {
 	const { state, signup } = useContext(AuthContext);
-
+    console.log('signup', signup);
 	return (
 		<View style={styles.container}>
 			<AuthForm
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		justifyContent: 'center',
-		marginBottom: 200
+		marginBottom: 180
 	}
 });
 
