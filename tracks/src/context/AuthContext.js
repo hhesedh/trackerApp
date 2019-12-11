@@ -16,7 +16,7 @@ const authreducer = (state, action) => {
 	}
 };
 
-const tryLocalSigin = dispatch => async () => {
+const tryLocalSignin = dispatch => async () => {
 	const token = await AsyncStorage.getItem('token');
 	if (token) {
 		dispatch({ type: 'signin', payload: token });
@@ -74,6 +74,6 @@ const signout = dispatch => {
 };
 export const { Provider, Context } = createDataContext(
 	authreducer,
-	{ signup, signout, signin, clearErrorMessage, tryLocalSigin },
+	{ signup, signout, signin, clearErrorMessage, tryLocalSignin },
 	{ token: null, errorMessage: '' }
 );
