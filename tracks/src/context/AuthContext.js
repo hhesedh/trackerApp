@@ -9,10 +9,16 @@ const authreducer = (state, action) => {
 			return { ...state, errorMessage: action.payload };
 		case 'signin':
             return { ...state, token: action.payload };
+        case 'clear_error_message':
+            return {...state, errorMessage: ''}
 		default:
 			return state;
 	}
 };
+
+const clearErrorMessage = dispatch => () => {
+    dispatch({type: 'clear_error_message'})
+}
 
 const signup = dispatch => async ({ email, password }, callback) => {
 	// make api request to sign up with that email and password
@@ -58,6 +64,6 @@ const signout = dispatch => {
 };
 export const { Provider, Context } = createDataContext(
 	authreducer,
-	{ signup, signout, signin },
+	{ signup, signout, signin, clearErrorMessage },
 	{ token: null, errorMessage: '' }
 );
