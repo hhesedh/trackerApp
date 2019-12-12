@@ -1,28 +1,31 @@
-import {useState, useEffect} from 'react';
-import {Accuracy, requestPermissionsAsync, watchPositionAsync} from 'expo-location';
+import { useState, useEffect } from 'react';
+import {
+	Accuracy,
+	requestPermissionsAsync,
+	watchPositionAsync
+} from 'expo-location';
 
-export default (callback) => {
-    const [err, setErr] = useState(null);
+export default callback => {
+	const [err, setErr] = useState(null);
 	const startWatching = async () => {
 		try {
 			await requestPermissionsAsync();
-			await watchPositionAsync(
+			const subscriber = await watchPositionAsync(
 				{
-                    accuracy: Accuracy.BestForNavigation,
-                    timeInterval: 1000,
-                    distanceInterval: 10
+					accuracy: Accuracy.BestForNavigation,
+					timeInterval: 1000,
+					distanceInterval: 10
 				},
-                callback
+				callback
 			);
 		} catch (err) {
 			setErr(err);
 		}
-    };
+	};
 
-    useEffect(() => {
+	useEffect(() => {
 		startWatching();
-    }, []);
-    
-    return [err];
+	}, []);
 
-}
+	return [err];
+};
